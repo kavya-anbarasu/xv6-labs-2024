@@ -14,7 +14,7 @@ char* fmtname(char *path)
     ;
   p++;
 
-  // Return blank-padded name.
+  // no padding!! and make sure to terminate string with 0!
   if(strlen(p) >= DIRSIZ)
     return p;
   memmove(buf, p, strlen(p));

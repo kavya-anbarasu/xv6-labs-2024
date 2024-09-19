@@ -1,0 +1,12 @@
+1. The syscall() function is being called by usertrap() in kernel/trap.c.
+2. The value of p->trapframe->a7 is 0x7 and this means that the process is making a system call to SYS_exec.
+3. The previous mode was User Mode because the SPP bit (bit 8) is 0. The output of GDB was 0x200000022.
+4.
+    `lw	a3,0(zero)`
+    a3 register corresponds to num
+5. 
+    The kernel crashes because it is attempting to dereference a null pointer, which corresponds to the memory address 0. 
+    Address 0 is not mapped in either the kernel or user address space. This unmapped address causes a page fault when 
+    the kernel attempts to load a value from it, leading to a crash. Yes this is confirmed by the value of scause (0xd)
+    because this is indicates a store/amo page fault which happens when the system tries to write to an invalid mem address.
+6. The process that was running when the kernel panicked was "initcode" and the pid was 1.

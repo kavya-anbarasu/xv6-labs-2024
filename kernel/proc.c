@@ -310,6 +310,8 @@ fork(void)
 
   safestrcpy(np->name, p->name, sizeof(p->name));
 
+  np->trace_mask = p->trace_mask; // np is the new process, p is the parent process
+
   pid = np->pid;
 
   release(&np->lock);

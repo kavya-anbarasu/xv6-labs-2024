@@ -10,3 +10,5 @@
     the kernel attempts to load a value from it, leading to a crash. Yes this is confirmed by the value of scause (0xd)
     because this is indicates a store/amo page fault which happens when the system tries to write to an invalid mem address.
 6. The process that was running when the kernel panicked was "initcode" and the pid was 1.
+
+The attack doesn't work anymore because we are accessing a different location in memory than that where the secret was stored.
